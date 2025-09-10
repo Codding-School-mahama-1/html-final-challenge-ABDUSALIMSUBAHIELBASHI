@@ -1,147 +1,127 @@
-<!--
-SERIOUS HTML CHALLENGE FOR STUDENTS
-
-Instructions:
-1. This is your homepage. You must create at least two other HTML files (e.g., about.html, contact.html) and link to them from this page.
-inthose files 
-about.html
-`
-Add a heading (e.g., <h1>About Me</h1>).
-Write a short paragraph about yourself or the project.
-Include at least one image with an alt attribute.
-Add a list (ordered or unordered) of your skills or interests.
-Add id attributes to at least one element for linking or styling.
-contact.html
-
-Add a heading (e.g., <h1>Contact</h1>).
-Write a short paragraph explaining how to contact you.
-Create a form with at least two labeled inputs (e.g., name and email).
-Add a table with at least three rows and two columns (e.g., contact methods and details).
-Use id attributes for at least one element.`
-
-Add a heading (e.g., <h1>Contact</h1>).
-Write a short paragraph explaining how to contact you.
-Create a form with at least two labeled inputs (e.g., name and email).
-Add a table with at least three rows and two columns (e.g., contact methods and details).
-Use id attributes for at least one element.
-
-
-2. Add navigation links at the top that link to sections within this homepage (use anchor tags and id attributes).
-3. Create at least two sections in this file (e.g., About, Contact) and link to them from the navigation.
-4. Embed one of your other HTML files in an <iframe> below (for example, show about.html inside the homepage).
-5. Create a small form below the iframe. The form must have at least two labeled inputs (e.g., name and email). Use <label> tags correctly.
-6. Below the form, create a table that displays at least three names. The table must have a header row and use <th> and <td>.
-7. Use <div> tags to organize your layout. Add class and id attributes to your divs and other elements for future CSS styling.
-8. Add comments in your code explaining your choices and structure.
-9. All links, ids, and navigation must work correctly.
-10. Personalize your content and make your page clear and well-structured.
-
-This challenge will test your understanding of linking, structure, forms, tables, iframes, and semantic HTML. Good luck!
--->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Personal Website</title><img src="" alt="">
-    <style>gettyimages-1553472296-612x612.jpg
-        /* Basic styling for layout */
-        body {
+    <style>
+        gettyimages-1553472296-612x612.jpg body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
         }
+
         nav {
-            background-color: #333;
+            background-color: hsl(320, 90%, 4%);
             padding: 10px;
             text-align: center;
         }
+
         nav a {
-            color: white;
+            color: rgb(252, 12, 12);
             padding: 10px 20px;
             text-decoration: none;
         }
+
         nav a:hover {
-            background-color: #575757;
+            background-color: #67df17;
         }
+
         .container {
             width: 80%;
             margin: 20px auto;
         }
+
         section {
             margin-bottom: 40px;
             padding: 20px;
-            border: 1px solid #ddd;
-            background-color: #f9f9f9;
+            border: 1px solid hwb(125 10% 7%);
+            background-color: #8cdb0b;
         }
+
         iframe {
             width: 100%;
             height: 400px;
             margin-top: 20px;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
             margin-top: 20px;
         }
-        th, td {
+
+        th,
+        td {
             padding: 10px;
-            border: 1px solid #ddd;
+            border: 1px solid hsl(246, 76%, 47%);
         }
+
         form {
             margin-top: 20px;
         }
+
         label {
             display: block;
             margin-bottom: 5px;
         }
     </style>
 </head>
+
 <body>
-
-    <!-- Navigation Bar -->
     <nav>
-        <a href="#about">About Section</a> | 
-        <a href="#contact">Contact Section</a> | 
-        <a href="about.html" target="iframe">About Page</a> | 
-        <a href="contact.html" target="iframe">Contact Page</a>
+        <a href="#HOME">1-HOME </a><ul></ul>
+        <a href="#contact">2-Contact & skilly & Section & Friends)</a><ul></ul>|
+        <a href="#about">3-page</a><ul></ul>
     </nav>
-
     <div class="container">
-
-        <!-- Section 1: About -->
         <section id="about">
+            <h1>page (B) </h1>
             <h2>About Me</h2>
+            <skilly:ul> my ' skilly</skilly:ul>
             <img src="gettyimages-1553472296-612x612.jpg" alt="">
-            <p>Hello! Mygettyimages-1553472296-612x612.jpg name IS ELAF SALIM and I’m a web developer <ul></ul> I love creating websites and web applications that are both functional and beautiful. My passion is to continuously learn and grow in the tech field.</p>
+            <p>Hello!my name is Abdu SALIM I’m web developer
+            <ul></ul> I love creating websites and web applications that are <ul>
+            </ul>both functional and beautiful. My passion is to continuously <ul>
+            </ul>learn and grow in the tech field.</p>
+            <a href="https://www.YouTube.com" target="_blank">Youtube.com</a>
+            </p>
+            <iframe width="460" height="315" src="https://www.youtube.com/embed/2bdWM5ygP5o?si=M5TyakTsO5eR5ubO"
+                title="YouTube video player" framFeborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+                <Ul></Ul>
+            </iframe>
         </section>
-
-        <!-- Section 2: Contact -->
         <section id="contact">
+            <h1>page (A)</h1>
+
             <h2>Contact Me</h2>
-            <p>If you'd like to get in touch with me,<ul></ul> please feel free to fill out the form below!</p>
-
-            <!-- Contact Form -->
+            <p>If you'd like to get in touch with me,
+            <ul></ul> please feel free to fill out the form below!</p>
             <form>
-                <label for="name">Name:</label>
+                <label for="name">full Name:</label>
                 <input type="text" id="name" name="name" required><br><br>
-
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required><br><br>
-
-                <input type="submit" value="Submit">
+                <label for="passweard">passwerad:</label>
+                <input type="text" id="name=" required><br><br>
+                <label for="phone">phone:</label>
+                <input type="text" id="name"="required><br>
+                <input type=" submit" value="Submit">
             </form>
         </section>
-
-        <!-- Embedding another HTML file using iframe -->
         <section>
+            <H1>page (C)</H1>
+
             <h3>View My Portfolio</h3>
-            <!-- Embed the 'about.html' page inside the homepage -->
             <iframe src="about.html" name="iframe"></iframe>
         </section>
-
-        <!-- Table with Names -->
         <section>
+
+            <h1>page (E)</h1>
+
             <h3>My Friends</h3>
             <table>
                 <thead>
@@ -153,17 +133,17 @@ This challenge will test your understanding of linking, structure, forms, tables
                 </thead>
                 <tbody>
                     <tr>
-                        <td>Alice</td>
+                        <td>1-Alice Ahamed AIL</td>
                         <td>Web Designer</td>
                         <td>New York</td>
                     </tr>
                     <tr>
-                        <td>Bob</td>
+                        <td>2-Abdu salim SUBASHI</td>
                         <td>Backend Developer</td>
-                        <td>San Francisco</td>
+                        <td>kigali/Rwanda</td>
                     </tr>
                     <tr>
-                        <td>Charlie</td>
+                        <td>3-Charlie JONH HASSHAN</td>
                         <td>Project Manager</td>
                         <td>Chicago</td>
                     </tr>
@@ -172,8 +152,6 @@ This challenge will test your understanding of linking, structure, forms, tables
         </section>
 
     </div>
-
-    
-    
 </body>
+
 </html>
