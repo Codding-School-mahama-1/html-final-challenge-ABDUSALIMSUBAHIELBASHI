@@ -42,56 +42,138 @@ This challenge will test your understanding of linking, structure, forms, tables
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Homepage Challenge</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Personal Website</title><img src="" alt="">
+    <style>gettyimages-1553472296-612x612.jpg
+        /* Basic styling for layout */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #575757;
+        }
+        .container {
+            width: 80%;
+            margin: 20px auto;
+        }
+        section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            background-color: #f9f9f9;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
-    <!-- Navigation bar: Link to sections and other HTML files -->
+
+    <!-- Navigation Bar -->
     <nav>
-        <!-- Example: <a href="#about">About Section</a> | <a href="#contact">Contact Section</a> | <a href="about.html">About Page</a> | <a href="contact.html">Contact Page</a> -->
+        <a href="#about">About Section</a> | 
+        <a href="#contact">Contact Section</a> | 
+        <a href="about.html" target="iframe">About Page</a> | 
+        <a href="contact.html" target="iframe">Contact Page</a>
     </nav>
-    <hr>
-    <!-- Main content area -->
-    <div class="main-content" id="main-content">
-        <!-- Section 1: About  add id call it about section -->
-        <section >
-            <!-- Your About content here -->
+
+    <div class="container">
+
+        <!-- Section 1: About -->
+        <section id="about">
+            <h2>About Me</h2>
+            <img src="gettyimages-1553472296-612x612.jpg" alt="">
+            <p>Hello! Mygettyimages-1553472296-612x612.jpg name IS ELAF SALIM and I’m a web developer <ul></ul> I love creating websites and web applications that are both functional and beautiful. My passion is to continuously learn and grow in the tech field.</p>
         </section>
-        <!-- Section 2: add id call it  Contact  -->
-        <section >
-            <!-- Your Contact content here -->
+
+        <!-- Section 2: Contact -->
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <p>If you'd like to get in touch with me,<ul></ul> please feel free to fill out the form below!</p>
+
+            <!-- Contact Form -->
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required><br><br>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required><br><br>
+
+                <input type="submit" value="Submit">
+            </form>
         </section>
+
+        <!-- Embedding another HTML file using iframe -->
+        <section>
+            <h3>View My Portfolio</h3>
+            <!-- Embed the 'about.html' page inside the homepage -->
+            <iframe src="about.html" name="iframe"></iframe>
+        </section>
+
+        <!-- Table with Names -->
+        <section>
+            <h3>My Friends</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Location</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Alice</td>
+                        <td>Web Designer</td>
+                        <td>New York</td>
+                    </tr>
+                    <tr>
+                        <td>Bob</td>
+                        <td>Backend Developer</td>
+                        <td>San Francisco</td>
+                    </tr>
+                    <tr>
+                        <td>Charlie</td>
+                        <td>Project Manager</td>
+                        <td>Chicago</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
     </div>
-    <hr>
-    <!-- Embed another HTML file using iframe add a youtube video -->
-    <div class="iframe-area" id="iframe-area">
-        <!-- Example: <iframe src="about.html" width="400" height="200"></iframe> -->
-    </div>
-    <hr>
-    <!-- Small form with labels and inputs -->
-    <div class="form-area" id="form-area">
-        <!-- Example:
-        <form>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name">
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
-            <input type="submit" value="Submit">
-        </form>
-        -->
-    </div>
-    <hr>
-    <!-- Table to display names but dont copy mine add more names and more rows atleast 3 rows and columns -->
-    <div class="table-area" id="table-area">
-        <!-- Example:
-        <table>
-            <tr><th>Name</th></tr>
-            <tr><td>Alice</td></tr>
-            <tr><td>Bob</td></tr>
-            <tr><td>Charlie</td></tr>
-        </table>
-        -->
-    </div>
-    <!-- Add comments throughout your code explaining your choices! -->
+
+    
+    
 </body>
 </html>

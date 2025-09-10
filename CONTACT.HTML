@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+
+
+
+
+ <title>My Personal Home page</title>
+    <style>
+        /* Basic styling for layout */
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        header {
+            background-color: hsl(54, 90%, 51%);
+            padding: 1em 0;
+            text-align: center;
+        }
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        .iframe-container {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .form-container, .table-container {
+            margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid hsl(340, 92%, 48%);
+        }
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            color: #2165f8;
+        }
+    </style>
+</head>
+<body>
+
+
+<header>
+    <h1>Welcome to Mr Abdu salim My Personal Homepage</h1>
+    <nav>
+        <a href="#about">About</a> | 
+        <a href="#contact">Contact</a> | 
+        <a href="#friends">Friends</a>
+    </nav>
+</header>
+
+<div class="container">
+
+    
+    <section id="about">
+        <h2>About Me</h2>
+        <img src="gettyimages-1553472296-612x612.jpg" alt="">
+        <p>Hello! I’m Abdu salim a passionate web developer who <ul></ul>loves working on creative projects. <ul></ul>I've been building websites for a few years now, and I’m always excited to learn new technologies and solve challenges in interesting ways.</p>
+    </section>
+
+    
+    <section id="contact">
+        <h2>Contact</h2>
+        <p>If you'd like to reach out, please feel free to use <ul></ul>the form below. I would love to hear from you!</p>
+
+        
+        <form id="contactForm">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <button type="submit">Submit</button>
+        </form>
+    </section>
+
+    
+    <div class="iframe-container">
+        <h3>Check Out My Portfolio</h3>
+        
+        <iframe src="portfolio.html" width="100%" height="400px" title="My Portfolio"></iframe>
+    </div>
+
+
+    <div class="form-container">
+        <h3>Newsletter Signup</h3>
+        <form id="newsletterForm">
+            <label for="newsletterName">Name:</label>
+            <input type="text" id="newsletterName" name="newsletterName" required><br><br>
+
+            <label for="newsletterEmail">Email:</label>
+            <input type="email" id="newsletterEmail" name="newsletterEmail" required><br><br>
+
+            <button type="submit">Subscribe</button>
+        </form>
+    </div>
+
+    
+    <div class="table-container" id="friends">
+        <h3>My Friends & good i dea </h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>ELAF Abdu sali </td>
+                    <td>Web Designer</td>
+                </tr>
+                <tr>
+                    <td>subashi elbasha</td>
+                    <td>Backend Developer</td>
+                </tr>
+                <tr>
+                    <td>Samuel Lee</td>
+                    <td>Project Manager</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+<div class="footer">
+    <p>&copy; 8/12/2025 My name is ELAF Abdu salim <ul></ul> my Personal Website. All Rights Reserved.</p>
+</div>
+</body>
+</html>
