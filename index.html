@@ -1,11 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Clock & Time table</title>
+  <style>
+    :root{
+      --bg: #b422ee;
+      --card: #fff;
+      --text: #0a40b4;
+      --muted: #140c00;
+      --accent: #8b445c;
+      --row-highlight: #e719a2;
+      --shadow: 0 6px 18px rgba(63, 206, 19, 0.06);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    .dark {
+      --bg: #f510bc;
+      --card: hsl(240, 60%, 44%);
+      --text: #c29314;
+      --muted: #064abe;
+      --accent: #60a5fa;
+      --row-highlight: rgba(19, 112, 219, 0.801);
+      --shadow: 0 6px 18px rgba(15, 38, 141, 0.6);
+    }
+
+    body{
+      margin:0;
+      min-height:100vh;
+      background: linear-gradient(180deg,var(--bg), #cccdd3 120%);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      box-sizing:border-box;
+    }
+    .container{
+      width:100%;
+      max-width:1000px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:22px;
+      align-items:start;
+    }
+    .card{
+      background:var(--card);
+      border-radius:14px;
+      padding:18px;
+      box-shadow:var(--shadow);
+    }
+    .timetable-header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+      margin-bottom:12px;
+    }
+    h1{ font-size:20px; margin:0; }
+    .muted{ color:var(--muted); font-size:13px; }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      font-size:14px;
+      overflow:hidden;
+    }
+    thead th{
+      text-align:left;
+      padding:10px 12px;
+      font-weight:600;
+      font-size:13px;
+      color:var(--muted);
+      background:transparent;
+    }
+    tbody td{
+      padding:12px;
+      border-top:1px solid rgba(0,0,0,0.04);
+    }
+    tbody tr.current{
+      background:var(--row-highlight);
+    }
+    .time-cell{
+      width:90px;
+      font-weight:600;
+    }
+    .clocks{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+    }
+    .digital{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:12px;
+    }
+    .big-time{
+      font-size:34px;
+      font-weight:700;
+      letter-spacing:1px;
+    }
+    .small{
+      text-align:right;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .analog-wrap{
+      display:flex;
+      justify-content:center;
+      padding:10px 0 6px;
+    }
+    .clock {
+      --size:160px;
+      width:var(--size);
+      height:var(--size);
+      border-radius:50%;
+      background:linear-gradient(180deg, rgba(218, 15, 15, 0.02), rgba(0,0,0,0.02));
+      position:relative;
+      box-shadow: 0 6px 18px rgba(53, 206, 14, 0.08) inset, 0 6px 18px rgba(2,6,23,0.06);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .clock .mark{
+      position:absolute;
+      width:4px;
+      height:12px;
+      top:8px;
+      left:calc(50% - 2px);
+      background:var(--muted);
+      transform-origin:50% calc(100% + 2px);
+      opacity:0.9;
+    }
+    .hand{
+      position:absolute;
+      left:50%;
+      top:50%;
+      transform-origin:50% 100%;
+      transform:translate(-50%,-100%) rotate(0deg);
+      border-radius:4px;
+    }
+    .hand.hour{
+      width:6px;
+      height:44px;
+      background:var(--text);
+      z-index:3;
+    }
+    .hand.min{
+      width:4px;
+      height:60px;
+      background:var(--text);
+      z-index:2;
+    }
+    .hand.sec{
+      width:2px;
+      height:66px;
+      background:var(--accent);
+      z-index:4;
+    }
+    .center-dot{
+      position:absolute;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--accent);
+      z-index:5;
+    }
+    .controls{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .btn{
+      background:transparent;
+      border:1px solid rgba(75, 224, 16, 0.06);
+      padding:8px 10px;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .btn:active{ transform:translateY(1px); }
+    @media (max-width:880px){
+      .container{ grid-template-columns: 1fr; }
+    }
+  </style>
 </head>
 <body>
-    
+  <div class="container" id="app">
+    <div class="card">
+      <div class="timetable-header">
+        <div>
+          <h1>Today's Timetable</h1>
+          <div class="muted" id="todayDate"></div>
+        </div>
+        <div class="controls">
+          <button class="btn" id="addDemo">Add Demo Event</button>
+          <button class="btn" id="toggleTheme">Toggle Dark</button>
+        </div>
+      </div>
+
+      <table id="timetable">
+        <thead>
+          <tr><th>Time</th><th>Event</th></tr>
+        </thead>
+        <tbody> 
+        </tbody>
+      </table>
+      <p class="muted" style="margin-top:10px;">Current hour is highlighted automatically.</p>
+    </div>
+    <div class="card">
+      <div class="clocks">
+        <div class="digital">
+          <div>
+            <div class="big-time" id="digitalTime">00:00:00</div>
+            <div class="muted" id="tzInfo">Time zone: local</div>
+          </div>
+          <div class="small">
+            <div id="ampmLabel">--</div>
+            <div style="margin-top:6px;" id="weekday">--</div>
+          </div>
+        </div>
+        <div class="analog-wrap">
+          <div class="clock" id="analogClock" aria-hidden="true">
+            <div class="mark" style="transform:rotate(0deg)"></div>
+            <div class="mark" style="transform:rotate(30deg)"></div>
+            <div class="mark" style="transform:rotate(60deg)"></div>
+            <div class="mark" style="transform:rotate(90deg)"></div>
+            <div class="mark" style="transform:rotate(120deg)"></div>
+            <div class="mark" style="transform:rotate(150deg)"></div>
+            <div class="mark" style="transform:rotate(180deg)"></div>
+            <div class="mark" style="transform:rotate(210deg)"></div>
+            <div class="mark" style="transform:rotate(240deg)"></div>
+            <div class="mark" style="transform:rotate(270deg)"></div>
+            <div class="mark" style="transform:rotate(300deg)"></div>
+            <div class="mark" style="transform:rotate(330deg)"></div>
+            <div class="hand hour" id="hhand"></div>
+            <div class="hand min" id="mhand"></div>
+            <div class="hand sec" id="shand"></div>
+            <div class="center-dot"></div>
+          </div>
+        </div>
+        <div style="text-align:center; font-size:13px;" class="muted">
+          Tip: Click "Add Demo Event" to add an event to the timetable at the current hour.
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const defaultEvents = [
+      { h: 8, text: "Morning review" },
+      { h: 9, text: "Team standup" },
+      { h:10, text: "Coding / Focus time" },
+      { h:11, text: "Client call" },
+      { h:12, text: "Lunch break" },
+      { h:13, text: "Emails / Admin" },
+      { h:14, text: "Design review" },
+      { h:15, text: "Work session" },
+      { h:16, text: "Wrap-up & plan next day" },
+    ];
+    const tbody = document.querySelector("#timetable tbody");
+    const digital = document.getElementById("digitalTime");
+    const tzInfo = document.getElementById("tzInfo");
+    const ampmLabel = document.getElementById("ampmLabel");
+    const weekday = document.getElementById("weekday");
+    const todayDate = document.getElementById("todayDate");
+    const addDemo = document.getElementById("addDemo");
+    const toggleTheme = document.getElementById("toggleTheme");
+    let events = [...defaultEvents];
+    function pad(n){ return String(n).padStart(2,"0"); }
+    function renderTimetable(){
+      tbody.innerHTML = "";
+      const now = new Date();
+      const currentHour = now.getHours();
+      for(let hour=6; hour<=21; hour++){
+        const event = events.find(e=>e.h === hour);
+        const tr = document.createElement("tr");
+        if(hour === currentHour) tr.classList.add("current");
+        const timeCell = document.createElement("td");
+        timeCell.className = "time-cell";
+        timeCell.textContent = `${pad(hour)}:00`;
+        const eventCell = document.createElement("td");
+        eventCell.textContent = event ? event.text : (hour < 12 ? "Free morning" : "Free afternoon");
+        tr.appendChild(timeCell);
+        tr.appendChild(eventCell);
+        tbody.appendChild(tr);
+      }
+    }
+    function updateClock(){
+      const now = new Date();
+      digital.textContent = `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+      tzInfo.textContent = `Time zone: ${Intl.DateTimeFormat().resolvedOptions().timeZone || "local"}`;
+      ampmLabel.textContent = now.getHours() >= 12 ? "PM" : "AM";
+      weekday.textContent = now.toLocaleDateString(undefined, { weekday: "long", month: "short", day: "numeric" });
+      todayDate.textContent = now.toLocaleDateString(undefined, { weekday: "long", month: "long", day: "numeric" });
+      const sec = now.getSeconds();
+      const min = now.getMinutes();
+      const hour = now.getHours() % 12;
+      const secDeg = (sec / 60) * 360;
+      const minDeg = (min / 60) * 360 + (sec/60)*6;
+      const hourDeg = (hour / 12) * 360 + (min/60)*30;
+      document.getElementById("shand").style.transform = `translate(-50%,-100%) rotate(${secDeg}deg)`;
+      document.getElementById("mhand").style.transform = `translate(-50%,-100%) rotate(${minDeg}deg)`;
+      document.getElementById("hhand").style.transform = `translate(-50%,-100%) rotate(${hourDeg}deg)`;
+      highlightCurrentHour();
+    }
+    function highlightCurrentHour(){
+      const now = new Date();
+      const ch = now.getHours();
+      Array.from(tbody.querySelectorAll("tr")).forEach(tr=>{
+        tr.classList.remove("current");
+        const txt = tr.querySelector(".time-cell").textContent;
+        const rowHour = parseInt(txt.split(":")[0],10);
+        if(rowHour === ch) tr.classList.add("current");
+      });
+    }
+    addDemo.addEventListener("click", ()=>{
+      const h = new Date().getHours();
+      const text = `Demo event at ${pad(h)}:00`;
+      const idx = events.findIndex(e=>e.h === h);
+      if(idx>=0) events[idx].text = text; else events.push({h, text});
+      renderTimetable();
+    });
+    toggleTheme.addEventListener("click", ()=>{
+      document.body.classList.toggle("dark");
+    });
+    renderTimetable();
+    updateClock();
+    setInterval(updateClock, 1000);
+    document.addEventListener("keydown", e=>{
+      if(e.key.toLowerCase() === "d" && (e.ctrlKey || e.metaKey)) {
+        e.preventDefault();
+        document.body.classList.toggle("dark");
+      }
+    });
+  </script>
 </body>
 </html>
